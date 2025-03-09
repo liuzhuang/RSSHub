@@ -32,7 +32,7 @@ export async function handler(ctx) {
                         title: article.title,
                         author: $('meta[name="dcterms.creator"]').attr('content'),
                         pubDate: parseDate($('meta[name="citation_publication_date"]').attr('content'), 'YYYY/MM/DD'),
-                        link,
+                        link: downloadLink,
                         doi: $('meta[name="citation_doi"]').attr('content'),
                         description: art(path.join(__dirname, 'template/description.art'), {
                             fullAbstract,

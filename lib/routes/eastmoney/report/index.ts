@@ -1,14 +1,8 @@
 import { Route, ViewType } from '@/types';
-import { getCurrentPath } from '@/utils/helpers';
 import cache from '@/utils/cache';
 import got from '@/utils/got';
 import { load } from 'cheerio';
 import { parseDate } from '@/utils/parse-date';
-import { art } from '@/utils/render';
-import path from 'node:path';
-import { getRatingChangeStr, getEpsOrPeStr } from '../utils';
-
-const __dirname = getCurrentPath(import.meta.url);
 
 export const route: Route = {
     path: '/report/:category',
@@ -89,48 +83,14 @@ async function handler(ctx) {
 
     const items = await Promise.all(
         list.map((item) => {
-            const tempOriginItem = item.originItem;
             delete item.originItem; // temp use
 
             return cache.tryGet(item.link, async () => {
                 try {
                     const { data: response } = await got(item.link);
                     const $ = load(response);
-
-                    if (category === 'stock') {
-                        const { title, stockName, stockCode, emRatingName, ratingChange, orgSName, indvInduName } = tempOriginItem;
-                        const ratingChangeStr = getRatingChangeStr(ratingChange);
-                        const currentYear = new Date().getFullYear();
-                        const nextYear = currentYear + 1;
-                        const description = $('.newsContent').html();
-                        const enclosureUrl = $('#ContentBody .rightlab').attr('href');
-                        const predictThisYearEps = getEpsOrPeStr(tempOriginItem.predictThisYearEps, 3);
-                        const predictThisYearPe = getEpsOrPeStr(tempOriginItem.predictThisYearPe, 2);
-                        const predictNextYearEps = getEpsOrPeStr(tempOriginItem.predictNextYearEps, 3);
-                        const predictNextYearPe = getEpsOrPeStr(tempOriginItem.predictNextYearPe, 2);
-
-                        item.enclosure_url = enclosureUrl;
-                        item.description = art(path.join(__dirname, '../templates/stock_description.art'), {
-                            title,
-                            stockName,
-                            stockCode,
-                            emRatingName,
-                            ratingChangeStr,
-                            description,
-                            orgSName,
-                            predictThisYearEps,
-                            predictThisYearPe,
-                            predictNextYearEps,
-                            predictNextYearPe,
-                            indvInduName,
-                            currentYear,
-                            nextYear,
-                            enclosureUrl,
-                        });
-                    } else {
-                        item.link = $('.pdf-link').attr('href');
-                        item.description = $('.ctx-content').text();
-                    }
+                    item.link = $('.pdf-link').attr('href');
+                    item.description = $('.ctx-content').text();
                     return item;
                 } catch {
                     return item;
