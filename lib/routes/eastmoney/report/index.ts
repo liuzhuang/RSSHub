@@ -52,6 +52,7 @@ async function handler(ctx) {
         macresearch: '宏观研究',
         strategyreport: '策略报告',
         stock: '个股研报',
+        newstock: '新股研究',
     };
     const linkType = {
         brokerreport: 'zw_brokerreport',
@@ -59,6 +60,7 @@ async function handler(ctx) {
         macresearch: 'zw_macresearch',
         strategyreport: 'zw_strategy',
         stock: 'info',
+        newstock: 'info',
     };
 
     const res = await got(`${baseUrl}/report/${category}`);
@@ -74,7 +76,7 @@ async function handler(ctx) {
         const stockName = category === 'stock' ? `[${item.stockName}]` : '';
         return {
             title: `[${item.orgSName}]${stockName}${item.title}`,
-            link: `${baseUrl}/report/${linkType[category]}` + (category === 'stock' ? `/${item.infoCode}.html` : `.jshtml?encodeUrl=${item.encodeUrl}`),
+            link: `${baseUrl}/report/${linkType[category]}` + (category === 'stock' || category === 'newstock' ? `/${item.infoCode}.html` : `.jshtml?encodeUrl=${item.encodeUrl}`),
             pubDate: parseDate(item.publishDate),
             author: item.researcher,
             originItem: item, // temp use
