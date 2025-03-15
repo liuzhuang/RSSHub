@@ -15,9 +15,11 @@ async function getData(url) {
     return response.results;
 }
 export async function handler(ctx) {
+    // console.log('路径', getSubPath(ctx));
     const url = 'https://www.nber.org/api/v1/working_page_listing/contentType/working_paper/_/_/search';
     const baseUrl = 'https://www.nber.org';
     const data = await cache.tryGet(url, () => getData(url), config.cache.routeExpire, false);
+    // console.log(data);
     const items = await Promise.all(
         data
             .filter((article) => getSubPath(ctx) === '/papers' || article.newthisweek)
@@ -28,6 +30,7 @@ export async function handler(ctx) {
                     const $ = load(response);
                     const downloadLink = $('meta[name="citation_pdf_url"]').attr('content');
                     const fullAbstract = $('.page-header__intro-inner').html();
+                    // console.log('PDF链接', downloadLink, '日期', $('meta[name="citation_publication_date"]').attr('content'), '标题', article.title);
                     return {
                         title: article.title,
                         author: $('meta[name="dcterms.creator"]').attr('content'),
