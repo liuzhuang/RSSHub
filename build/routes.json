@@ -28497,6 +28497,20 @@
   },
   "eastmoney": {
     "routes": {
+      "/guba/hot": {
+        "path": "/guba/hot",
+        "categories": [
+          "finance",
+          "popular"
+        ],
+        "example": "/eastmoney/guba/hot",
+        "name": "股吧精选",
+        "maintainers": [
+          "syzq"
+        ],
+        "description": "抓取东方财富股吧的精选文章",
+        "location": "guba/index.ts"
+      },
       "/report/:category": {
         "path": "/report/:category",
         "categories": [
