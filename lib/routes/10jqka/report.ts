@@ -28,6 +28,9 @@ async function handler() {
             const el = $(element);
             const date = el.find('td.tc').first().text().trim(); // 获取日期
             const pdfEl = el.find('td.tl a[target="_blank"]'); // 获取PDF名称和链接
+            if (!date) {
+                return [];
+            }
 
             // eslint-disable-next-line no-restricted-syntax
             const pdfs = pdfEl
