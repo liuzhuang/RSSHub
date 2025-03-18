@@ -24048,6 +24048,27 @@
     ],
     "lang": "en"
   },
+  "datayes": {
+    "routes": {
+      "/report": {
+        "path": "/report",
+        "categories": [
+          "finance"
+        ],
+        "example": "/datayes/report",
+        "parameters": {},
+        "name": "Summary",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "description": "",
+        "location": "index.ts"
+      }
+    },
+    "name": "萝卜投研",
+    "url": "https://robo.datayes.com/",
+    "lang": "zh-CN"
+  },
   "dayanzai": {
     "routes": {
       "/:category/:fulltext?": {
@@ -42824,6 +42845,28 @@
     },
     "name": "合肥工业大学",
     "url": "hfut.edu.cn",
+    "lang": "zh-CN"
+  },
+  "hibor": {
+    "routes": {
+      "/hot/today": {
+        "path": "/hot/today",
+        "categories": [
+          "finance",
+          "popular"
+        ],
+        "example": "/eastmoney/guba/hot",
+        "name": "慧博投研资讯",
+        "maintainers": [
+          "syzq"
+        ],
+        "description": "慧博投研资讯热点与研报",
+        "location": "index.ts"
+      }
+    },
+    "name": "慧博投研资讯",
+    "url": "hibor.com.cn",
+    "description": "",
     "lang": "zh-CN"
   },
   "hicairo": {

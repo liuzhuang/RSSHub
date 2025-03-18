@@ -1806,6 +1806,9 @@
   "/dataguidance/news": [
     "harveyqiu"
   ],
+  "/datayes/report": [
+    "TonyRL"
+  ],
   "/dayanzai/:category/:fulltext?": [],
   "/dbaplus/": [
     "cnkmmk"
@@ -3408,6 +3411,9 @@
   ],
   "/hfut/xc/notice/:type?": [
     "batemax"
+  ],
+  "/hibor/hot/today": [
+    "syzq"
   ],
   "/hicairo/": [
     "cnkmmk"
